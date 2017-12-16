@@ -1,0 +1,238 @@
+(1)
+node(a). 
+node(b).
+node(c).
+node(d). 
+node(e). 
+node(f). 
+node(g). 
+node(h). 
+edge(a, b). 
+edge(b, c). 
+edge(c, a). 
+edge(c, e). 
+edge(c, d). 
+edge(d, e). 
+edge(d, h). 
+edge(e, g). 
+edge(e, f). 
+edge(f, g). 
+edge(g, e).
+
+(2)
+parent(X, Y):- edge(X, Y). 
+
+child(X, Y):- parent(Y, X). 
+
+ancestor(X,Y):- path(X,Y,_).
+
+path(X,Y,Path) :- path(X,Y,[], P), reverse(P, Path). 
+path(X,X,T,[X|T]). 
+path(X,Y,P, R) :- edge(X,Z) , not(member(Z,P)) , path(Z,Y,[X|P], R). 
+
+length_of_path( X, Y, L):- path(X, Y, P), length(P, T), L is T - 1. 
+
+connected( X, Y):- path(X, Y, _); path(Y, X, _).
+
+undirected_edge(X, Y):- edge(X, Y). 
+undirected_edge(X, Y):- edge(Y, X). 
+
+undirected_path(X,Y,UP) :- undirected_path(X,Y,[], P), reverse(P, UP). 
+undirected_path(X,X,T,[X|T]). 
+undirected_path(X,Y,P, R) :- undirected_edge(X,Z) , not(member(Z,P)) , undirected_path(Z,Y,[X|P], R).
+
+
+(4)
+node(X)£º
+?- node(a). 
+	true. 
+?- node(o). 
+	false. 
+?- node(X). 
+	X = a ; 
+	X = b ;
+ 	X = c ;
+ 	X = d ; 
+	X = e ; 
+	X = f ;	 
+	X = g ;
+ 	X = h. 
+
+
+edge(X, Y):
+?- edge(c, e). 
+	true. 
+?- edge(e, c).
+	 false. 
+?- edge(a, B).
+	 B = b.
+?- edge(A, d).
+	 A = c.
+
+
+parent(X, Y):
+?- parent(b, c). 
+	true. 
+?- parent(c, b). 
+	false. 
+?- parent(A, e). 
+	A = c ;
+	A = d ; 
+	A = g. 
+?- parent(e, B).
+	B = g ; 
+	B = f.
+
+child( X, Y):
+?- child(b, c).
+	 false. 
+?- child(c, b). 
+	 true. 
+?- child(A, d). 
+	 A = e; 
+	 A = h. 
+?- child(d, B). 
+	 B = c.
+
+ancestor(X,Y):
+?- ancestor(a,d).
+	true ;
+?- ancestor(h,a).
+	false.
+?- ancestor(a,X).
+	X = a ;
+	X = b ;
+	X = c ;
+	X = e ;
+	X = g ;
+	X = f ;
+	X = g ;
+	X = d ;
+	X = e ;
+	X = g ;
+	X = f ;
+	X = g ;
+	X = h ;
+?- ancestor(X,h).
+	X = h ;
+	X = a ;
+	X = b ;
+	X = c ;
+	X = d ;
+
+path( X, Y):
+?- path(a, b, [a, b]). 
+	true . 
+?- path(a, d, [a, c, d]). 
+	false. 
+?- path(a, b, P). 
+	P = [a, b] ;
+?- path(a, d, P). 
+	P = [a, b, c, d] ;
+
+
+length_of_path( X, Y):
+?- length_of_path(a, c, 2). 
+	true . 
+?- length_of_path(a, d, 2).
+	 false. 
+?- length_of_path(a, e, L). 
+	L = 3;
+	L = 4.
+?- length_of_path(a, h, L). 
+	L = 4.
+
+
+connected( X, Y)
+?- connected(a, b). 
+	true . 
+?- connected(h, e). 
+	false. 
+?- connected(g, Y). 
+	Y = g ;
+	Y = e ;
+	Y = f ;	
+	Y = g ;
+	Y = a ;
+	Y = a ;
+	Y = a ;
+	Y = a ;
+	Y = b ;
+	Y = b ;
+	Y = b ;
+	Y = b ;
+	Y = c ;
+	Y = c ;
+	Y = c ;
+	Y = c ;
+	Y = d ;
+	Y = d ;
+	Y = e ;
+	Y = e ;
+	Y = f ;
+?- connected(X, a). 
+	X = a
+	X = b ;
+	X = c ;
+	X = a ;
+	X = b ;
+	X = c ;
+	X = e ;
+	X = g ;
+	X = f ;
+	X = g ;
+	X = d ;
+	X = e ;
+	X = g ;
+	X = f ;
+	X = g ;
+	X = h ;
+
+
+undirected_edge( X, Y):
+?- undirected_edge(c, b). 
+	true. 
+?- undirected_edge(a, g).
+ 	false. 
+?- undirected_edge(b, Y). 
+	Y = c ; 
+	Y = a. 
+?- undirected_edge(X, f). 
+	X = e ; 
+	X = g ; 
+
+
+undirected_path( X, Y):
+?- undirected_path(a, d, [a, c, d]). 
+	true . 
+?- undirected_path(a, e, [a, e]). 
+	false. 
+?- undirected_path(a, e, P). 
+	P = [a, b, c, e] . 
+	P = [a, b, c, d, e] .
+?- undirected_path(a, d, P).
+	P = [a, b, c, e, d] ;
+	P = [a, b, c, d] ;
+	P = [a, c, e, d] ;
+	P = [a, c, d] ;
+
+(5)
+?- tpath(X, Y).
+X = a, Y = c ; 
+X = b, Y = a ;
+X = b, Y = e ;
+X = b, Y = d ;
+X = c, Y = b ; 
+X = c, Y = g ;
+X = c, Y = f ; 
+X = c, Y = e ; 
+X = c, Y = h ; 
+X = d, Y = g ; 
+X = d, Y = f ; 
+X = Y, Y = e ; 
+X = e, Y = g ; 
+X = f, Y = e ; 
+X = Y, Y = g ; 
+X = g, Y = f.
+
+Tpath can use Node1 to find Node2 within two direct edges¡£ 

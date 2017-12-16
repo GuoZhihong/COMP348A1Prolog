@@ -1,0 +1,33 @@
+?- magic(Hermione).
+Respond;
+§t	Hermione = dobby ;
+	Hermione = dobby ;
+	Hermione = hermione ;
+	Hermione = mcGonagall ;
+	Hermione = rita_skeeter.
+First respond:
+	(1)go to line 6 find magic(X) = house_elf(X) ,unify X = Hermione.
+	(2)go to line 1 find house_elf(dobby) and unifiy X = Herminoe = dobby.
+	(3)respond Herminoe = dobby.	
+Second respond:
+	(1)go to line 7 find magic(X) = wizard(X) ,unify X = Hermione.
+	(2)go to line 5 find wizard(dobby) and unifiy X = Herminoe = dobby.
+	(3)respond Herminoe = dobby.	
+Third respond:
+	(1)go to line 8 find magic(X) = witch(X) ,unify X = Hermione.
+	(2)go to line 2 find witch(hermione) and unifiy X = Herminoe = hermione.
+	(3)respond Herminoe = hermione.	
+Fourth respond:
+	(1)go to line 8 find magic(X) = witch(X) ,unify X = Hermione.
+	(2)go to line 3 find witch(mcGonagall) and unifiy X = Herminoe = mcGonagall.
+	(3)respond Herminoe = mcGonagall.	
+Fifth respond:
+	(1)go to line 8 find magic(X) = witch(X) ,unify X = Hermione.
+	(2)go to line 4 find witch(rita_skeeter) and unifiy X = Herminoe = rita_skeeter.
+	(3)respond Herminoe = rita_skeeter.
+
+
+?- magic(hermione).
+Respond: True.
+	(1)go to line 8 find magic(X) = witch(X) ,unify X = hermione.
+	(2)go to line 2 find witch(hermione),respond true.

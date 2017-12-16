@@ -1,0 +1,32 @@
+1.healthyFood(X) = healthyFood(bread)
+This pair can be unified with X = bread.
+
+2.healthyFood(bread,X) = healthyFood(Y,salad)
+This pair can be unified with X = salad, Y = bread.
+
+3.healthyFood(bread,X,milk) = healthyFood(Y,salad,X)
+This pair can't be unified because X is conflicted. 
+
+4.healthyFood(X) = Y
+This pair can be unified with Y = healtyFood(X).
+
+5.meal(healthyFood(bread),drink(milk)) = meal(X,Y)
+This pair can be unified with X = healtyFood(bread), Y = drink(milk).
+
+6.meal(healthyFood( Z ),drink(milk)) = meal(X,Y)
+This pair can be unified with X = healtyFood(bread), Y = drink(milk).
+
+7.meal(healthyFood(bread),drink(milk)) = meal(X, drink(Water))
+This pair can be unified with X = healtyFood(bread), Water = milk.
+
+8.meal(healthyFood(bread), Y) = meal(X, drink(water))
+This pair can be unified with Y = drink(water), X = healtyFood(bread).
+
+9.breakfast(healthyFood(bread),egg,milk)= breakfast(healthyFood(Y),Y, Z)
+This pair can't be unified because Y is conflicted.
+
+10.dinner( X, Y, Time) = dinner( jack, cook( egg, oil), Evening)
+This pair can be unified with X = jack, Y = cook( egg, oil),Time = Evening.
+
+11.k(s(g), Y) = k(X, t(k))
+This pair can be unified with X = s(g),Y= t(k).

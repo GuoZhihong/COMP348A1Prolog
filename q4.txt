@@ -1,0 +1,14 @@
+1.	
+	outcome(_, []) is the base case
+	outcome([_, E | L], [E | M]) :- !,outcome(L, M).recursively called this rule.
+
+	_ = a, E = b, L = [c, d, e, f, g]
+	_ = c, E = d, L =[e, f, g]
+	_ = e, E = f, L = [g],E|M = []
+	reach the base case.
+	so,
+	X = [b,d,f]
+2.
+(a) this case is to produce a new list by picking even index from old list(assuming first element index in old list is 1).
+(b) search for X ig find one result in database then stop backtracking, and respond right away. 
+(c)Because each of variables only occurs once, we use it just to transmit information,so we can use anonymous variables.

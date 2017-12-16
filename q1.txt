@@ -1,0 +1,24 @@
+sisters(mary,catherine).
+brothers(john,simone).
+
+marriage(john, mary).
+mother_child(mary, johnny).
+mother_child(mary, peter).
+father_child(john, johnny).
+father_child(john, peter).
+
+marriage(josh, catherine).
+mother_child(catherine, william).
+father_child(josh, william).
+
+marriage(simone, kate).
+mother_child(kate, betty).
+father_child(simone, betty).
+
+parent(X, Y) :- mother_child(X, Y); father_child(X, Y).
+
+siblings(X, Y) :- parent(Z, X), parent(Z, Y).
+siblings(X, Y) :- sisters(X, Y).
+siblings(X, Y) :- brothers(X, Y).
+
+cousins(X, Y) :- siblings(A, B),parent(B, X),parent(A, Y).
